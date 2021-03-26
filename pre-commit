@@ -1,0 +1,37 @@
+# Get list of staged files.
+FILES=$(git diff --cached --name-only)
+if [[ $(echo $FILES | wc -c) -eq "1" ]]
+then
+  # No files staged, let git handle the rest.
+  exit 0
+fi
+
+GREEN='\033[0;32m'
+LRED='\033[1;31m'
+NC='\033[0m'
+
+# Generate diff file from phpcs.
+echo ${GREEN}Creating patch for staged files\(can take some time\).${NC}
+phpcs -p --report-diff=phpcspatch.diff $FILES
+
+# Check if there is anything to patch.
+WORDS=$( cat phpcspatch.diff | wc -m )
+if [[ "$WORDS" -gt "1" ]]
+then
+  # Apply diff file.
+  echo ${GREEN}Patching staged files.${NC}
+  patch -p0 -ui phpcspatch.diff
+
+  # Remove the diff file.
+  echo ${GREEN}Removing patch file.${NC}
+  rm phpcspatch.diff
+
+  echo ${LRED}Please stage the new changes.${NC}
+
+  exit 1
+else
+  # Nothing to patch so git can commit as normal.
+  echo ${GREEN}Nothing to patch.${NC}
+  rm phpcspatch.diff
+  exit 0
+fi
