@@ -3,7 +3,7 @@
     "description": "Pre-commit git hook for enforcing php standards.",
     "type": "scripts",
     "license": "MIT",
-    "require": {
+    "require-dev": {
         "squizlabs/php_codesniffer": "^2.7 || ^3.0"
     }
 }
