@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Get list of staged files.
 FILES=$(git diff --cached --name-only)
 if [[ $(echo $FILES | wc -c) -eq "1" ]]
