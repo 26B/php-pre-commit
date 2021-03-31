@@ -12,5 +12,5 @@ then
     exit 1
 fi
 
-cp ${SCRIPT_DIR}/pre-commit ${GIT_DIR}/.git/hooks/pre-commit
+cp ${SCRIPT_DIR}/../26b/php-pre-commit/pre-commit ${GIT_DIR}/.git/hooks/pre-commit
 chmod +x ${GIT_DIR}/.git/hooks/pre-commit
