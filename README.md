@@ -41,12 +41,12 @@ To make sure you're using the global package, use:
 ### Setup WordPress Standards
 First we need to clone the WordPress standards repository. It should be placed in a directory that `phpcs` can access. We placed ours in a `wpcs` directory in root. Clone the repository into the `wpcs` folder via:
 ```
-git clone git@github.com:WordPress/WordPress-Coding-Standards.git wpcs
+git clone git@github.com:WordPress/WordPress-Coding-Standards.git --branch 2.3.0 wpcs
 ```
 
 Secondly, we need to tell `phpcs` where these standards are.
 ```
-phpcs --config-set installed_paths /Users/26b/wpcs
+phpcs --config-set installed_paths /full/path/to/wpcs
 ```
 
 Finally, in order to check that `phpcs` recognises and uses the standards, we can check it like this:
@@ -58,8 +58,8 @@ The installed coding standards are PEAR, Zend, PSR2, Squiz, PSR1, PSR12, WordPre
 The output should resemble this, with the WordPress standards. If they are missing, `phpcs` might not be recognising the path. Check its paths via:
 ```
 > phpcs --config-show
-Using config file: /Users/26b/.composer/vendor/squizlabs/php_codesniffer/CodeSniffer.conf
+Using config file: /full/path/to/global/composer/vendor/squizlabs/php_codesniffer/CodeSniffer.conf
 
 default_standard: WordPress-Extra
-installed_paths:  /Users/26b/wpcs
+installed_paths:  /full/path/to/wpcs
 ```
