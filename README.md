@@ -11,10 +11,14 @@ composer require --dev 26b/php-pre-commit
 In order for the hooks to be moved into the `.git/hooks` folder add the following to the project's `composer.json`:
 ```
 "scripts": {
-    "install-hooks": "sh ./vendor/26b/php-pre-commit/setup-hooks.sh",
-    "post-install-cmd": "@install-hooks",
-    "post-update-cmd": "@install-hooks"
+    "post-install-cmd": "php-pre-commit",
+    "post-update-cmd": "php-pre-commit"
 }
+```
+
+You will also need to update the execute access of the bin script:
+```
+chmod +x vendor/bin/php-pre-commit
 ```
 
 With `composer install` or `composer update` the `pre-commit` hook will be moved into `.git/hooks`.
