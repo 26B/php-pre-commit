@@ -31,25 +31,30 @@ This package already requires `phpcs` but you might want to configure it globall
 ```
 composer global require squizlabs/php_codesniffer
 ```
+
 To make sure you're using the global package, use:
 ```
 > which phpcs
 /Users/26b/.composer/vendor/bin/phpcs
 ```
+
 ### Setup WordPress Standards
 First we need to clone the WordPress standards repository. It should be placed in a directory that `phpcs` can access. We placed ours in a `wpcs` directory in root. Clone the repository into the `wpcs` folder via:
 ```
 git clone git@github.com:WordPress/WordPress-Coding-Standards.git wpcs
 ```
+
 Secondly, we need to tell `phpcs` where these standards are.
 ```
 phpcs --config-set installed_paths /Users/26b/wpcs
 ```
+
 Finally, in order to check that `phpcs` recognises and uses the standards, we can check it like this:
 ```
 > phpcs -i
 The installed coding standards are PEAR, Zend, PSR2, Squiz, PSR1, PSR12, WordPress, WordPress-Extra, WordPress-Docs and WordPress-Core
 ```
+
 The output should resemble this, with the WordPress standards. If they are missing, `phpcs` might not be recognising the path. Check its paths via:
 ```
 > phpcs --config-show
