@@ -8,9 +8,17 @@ then
   exit 0
 fi
 
-GREEN='\033[0;32m'
-LRED='\033[1;31m'
-NC='\033[0m'
+GREEN=''
+LRED=''
+NC=''
+
+# Check if colors are supported.
+if [[ $(tput colors) -gt "2" ]]
+then
+  GREEN='\033[0;32m'
+  LRED='\033[1;31m'
+  NC='\033[0m'
+fi
 
 # Generate diff file from phpcs.
 echo ${GREEN}Creating patch for staged files\(can take some time\).${NC}
