@@ -20,9 +20,16 @@ then
   NC='\033[0m'
 fi
 
+# Use local or global phpcs. Local has the priority.
+GIT_DIR=$(git rev-parse --show-toplevel)
+PHPCS="phpcs"
+if [ -f "$GIT_DIR/vendor/bin/phpcs" ]; then
+  PHPCS="$GIT_DIR/vendor/bin/phpcs"
+fi
+
 # Generate diff file from phpcs.
 echo ${GREEN}Creating patch for staged files\(can take some time\).${NC}
-phpcs -p --report-diff=phpcspatch.diff $FILES
+$PHPCS -p --report-diff=phpcspatch.diff $FILES
 
 # Check if there is anything to patch.
 WORDS=$( cat phpcspatch.diff | wc -m )
