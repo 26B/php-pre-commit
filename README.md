@@ -28,12 +28,6 @@ In order for the hooks to be moved into the `.git/hooks` folder add the followin
 }
 ```
 
-You will also need to update the execute access of the bin script:
-
-```bash
-chmod +x vendor/bin/php-pre-commit
-```
-
 With `composer install` or `composer update` the `pre-commit` hook will be moved into `.git/hooks`.
 
 If you want to skip the pre-commit execution, you can add the argument `--no-verify` to `git commit`.
