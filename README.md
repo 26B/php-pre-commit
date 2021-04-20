@@ -103,3 +103,11 @@ And add scripts, to configure `phpcs` correctly upon `composer install`, like th
     ]
 }
 ```
+
+## Troubleshooting
+
+- If the script is not executable, run the following, where the path is to the composer executable. (If installed globally it should be in `~/.composer/vendor/bin`, otherwise it's in the folder that contains `composer.json`.)
+
+    ```bash
+    chmod +x vendor/bin/php-pre-commit
+    ```
