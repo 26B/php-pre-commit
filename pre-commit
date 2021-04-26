@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# If currently in a merge don't check files.
+MERGE=$(git rev-parse -q --verify MERGE_HEAD)
+if [[ ! -z "$MERGE" ]]
+then
+  # Currently in merge, let git handle the rest.
+  exit 0
+fi
+
 # Get list of staged files excluding deleted files (lowercase d in --diff-filter).
 FILES=$(git diff --cached --name-only --diff-filter=d | grep \\.php)
 if [[ $(echo $FILES | wc -c) -eq "1" ]]
