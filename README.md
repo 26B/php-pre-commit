@@ -67,6 +67,36 @@ default_standard: WordPress-Extra
 installed_paths:  /full/path/to/wpcs
 ```
 
+#### Setup Laravel Standards (Manual)
+
+A Laravel's coding standard repository that is being updated consistently is [emielmolenaar/phpcs-laravel](https://github.com/emielmolenaar/phpcs-laravel). We will now proceed to the configuration (very similar to the *WordPress configuration*). First clone [emielmolenaar/phpcs-laravel](https://github.com/emielmolenaar/phpcs-laravel) repository:
+
+```bash
+git clone https://github.com/emielmolenaar/phpcs-laravel.git --branch 2.0
+```
+
+Again, tell to `phpcs` where the standards are.
+
+```bash
+phpcs --config-set installed_paths /full/path/to/phpcs-laravel
+```
+
+Once more, make sure `phpcs` recognises and uses the installed standards:
+
+```bash
+$ phpcs -i
+The installed coding standards are PEAR, Zend, PSR2, MySource, Squiz, PSR1, PSR12 and phpcs-laravel
+```
+
+The `--config-show` will give the following output:
+
+```bash
+$ phpcs --config-show
+Using config file: /full/path/to/composer/vendor/squizlabs/php_codesniffer/CodeSniffer.conf
+
+installed_paths: /full/path/to/phpcs-laravel
+```
+
 #### Alternative (Automatic)
 
 As an alternative you can use [PHP_CodeSniffer Standards Composer Installer Plugin](https://github.com/Dealerdirect/phpcodesniffer-composer-installer) which helps to automatically link the wanted standards to phpcs. Be aware that it requires `phpcs` locally and so our `pre-commit` hook will use that phpcs. We can then require this package and WPCS in the following manner:
@@ -102,6 +132,6 @@ And add scripts, to configure `phpcs` correctly upon `composer install`, like th
 
 - If the script is not executable, run the following, where the path is to the composer executable. (If installed globally it should be in `~/.composer/vendor/bin`, otherwise it's in the folder that contains `composer.json`.)
 
-    ```bash
-    chmod +x vendor/bin/php-pre-commit
-    ```
+```bash
+chmod +x vendor/bin/php-pre-commit
+```
