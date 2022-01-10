@@ -6,7 +6,7 @@ NC='\033[0m'
 SCRIPT_DIR="$(dirname $0)"
 GIT_DIR=$(git rev-parse --show-toplevel)
 
-# Check if the fit folders exists.
+# Check if the git folders exists.
 if test -z "$GIT_DIR"
 then
     echo ${LRED}No `.git/` folder found. Initialize with `git init` or check that it was cloned as intended.${NC}
