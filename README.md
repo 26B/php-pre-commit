@@ -104,6 +104,60 @@ And add scripts, to configure `phpcs` correctly upon `composer install`, like th
 }
 ```
 
+### Laravel
+
+#### Automatic Setup
+
+Here, you can also use [PHP_CodeSniffer Standards Composer Installer Plugin](https://github.com/Dealerdirect/phpcodesniffer-composer-installer) to automatically link the Laravel standards to phpcs. Again, make sure `phpcs` is installed locally and so our `pre-commit`. We just need to require [emielmolenaar/phpcs-laravel](https://github.com/emielmolenaar/phpcs-laravel) package and we are done:
+
+```bash
+composer require --dev emielmolenaar/phpcs-laravel
+```
+
+Finally, add the same scripts to configure `phpcs` correctly upon `composer install`:
+
+```json
+"scripts": {
+    "install-codestandards": [
+        "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+    ],
+    "post-install-cmd": [
+        "php-pre-commit",
+        "@install-codestandards"
+    ]
+}
+```
+
+#### Manual Setup
+
+A Laravel's coding standard repository that is being updated consistently is [emielmolenaar/phpcs-laravel](https://github.com/emielmolenaar/phpcs-laravel). We will now proceed to the configuration (very similar to the *WordPress configuration*). First clone [emielmolenaar/phpcs-laravel](https://github.com/emielmolenaar/phpcs-laravel) repository:
+
+```bash
+git clone https://github.com/emielmolenaar/phpcs-laravel.git --branch 2.0
+```
+
+Again, tell to `phpcs` where the standards are.
+
+```bash
+phpcs --config-set installed_paths /full/path/to/phpcs-laravel
+```
+
+Once more, make sure `phpcs` recognises and uses the installed standards:
+
+```bash
+$ phpcs -i
+The installed coding standards are PEAR, Zend, PSR2, MySource, Squiz, PSR1, PSR12 and phpcs-laravel
+```
+
+The `--config-show` will give the following output:
+
+```bash
+$ phpcs --config-show
+Using config file: /full/path/to/composer/vendor/squizlabs/php_codesniffer/CodeSniffer.conf
+
+installed_paths: /full/path/to/phpcs-laravel
+```
+
 ## Troubleshooting
 
 - If the script is not executable, run the following, where the path is to the composer executable. (If installed globally it should be in `~/.composer/vendor/bin`, otherwise it's in the folder that contains `composer.json`.)
