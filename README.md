@@ -2,9 +2,9 @@
 
 Pre-commit git hook for enforcing php standards.
 
-Currently uses PHP_CodeSniffer and corrects .php staged files according to a phpcs config file (usually a phpcs.xml).
+Currently uses PHP_CodeSniffer (PHPCS) and corrects .php staged files according to a phpcs config file (usually a phpcs.xml).
 
-This package **does not require** PHP_CodeSniffer because it is up to you whether you want to use a local or global `phpcs`. Local `phpcs` takes precedence when the pre-commit runs. You can require them in the following way:
+This package **does not require** PHPCS because it is up to you whether you want to use a local or global `phpcs`. Local `phpcs` takes precedence when the pre-commit runs. You can require them in the following way:
 
 ```bash
 # Local
@@ -33,6 +33,12 @@ With `composer install` or `composer update` the `pre-commit` hook will be moved
 If you want to skip the pre-commit execution, you can add the argument `--no-verify` to `git commit`.
 
 ## Use Cases
+
+### Local PHPCS
+
+If you intend to use different sets of standards in different repositories we advise you to install `php_codesniffer` locally, this will make sure that there will be no conflicts when configuring `phpcs --config-set ...` later on. In case you choose the local approach make sure to correct the PHPCS path on the examples below.
+
+Usually it would be something like changing all `phpcs` references to `./vendor/bin/phpcs` (or any other local path).
 
 ### WordPress
 
