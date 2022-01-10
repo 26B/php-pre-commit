@@ -6,11 +6,13 @@ NC='\033[0m'
 SCRIPT_DIR="$(dirname $0)"
 GIT_DIR=$(git rev-parse --show-toplevel)
 
+# Check if the fit folders exists.
 if test -z "$GIT_DIR"
 then
-    echo ${LRED}No .git found to move pre-commit hook.${NC}
+    echo ${LRED}No `.git/` folder found initialize with `git init` or check that it was cloned as intended.${NC}
     exit 0
 fi
 
+# Add pre-commit hook to the hooks directory.
 cp ${SCRIPT_DIR}/../26b/php-pre-commit/pre-commit ${GIT_DIR}/.git/hooks/pre-commit
 chmod +x ${GIT_DIR}/.git/hooks/pre-commit
