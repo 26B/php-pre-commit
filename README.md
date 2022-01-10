@@ -2,9 +2,9 @@
 
 Pre-commit git hook for enforcing php standards.
 
-Currently uses PHP_CodeSniffer and corrects .php staged files according to a phpcs config file (usually a phpcs.xml).
+Currently uses PHP_CodeSniffer (PHPCS) and corrects .php staged files according to a phpcs config file (usually a phpcs.xml).
 
-This package **does not require** PHP_CodeSniffer because it is up to you whether you want to use a local or global `phpcs`. Local `phpcs` takes precedence when the pre-commit runs. You can require them in the following way:
+This package **does not require** PHPCS because it is up to you whether you want to use a local or global `phpcs`. Local `phpcs` takes precedence when the pre-commit runs. You can require them in the following way:
 
 ```bash
 # Local
@@ -12,8 +12,6 @@ composer require --dev squizlabs/php_codesniffer
 # Or global
 composer require global squizlabs/php_codesniffer
 ```
-
-If you intend to use different sets of standards in different repositories we advise you to install `php_codesniffer` locally, this will make sure that there will be no conflicts when configuring `phpcs --config-set ...` later on.
 
 Install via the composer command:
 
@@ -36,6 +34,12 @@ If you want to skip the pre-commit execution, you can add the argument `--no-ver
 
 ## Use Cases
 
+### Local PHPCS
+
+If you intend to use different sets of standards in different repositories we advise you to install `php_codesniffer` locally, this will make sure that there will be no conflicts when configuring `phpcs --config-set ...` later on. In case you choose the local approach make sure to correct the PHPCS path on the examples below.
+
+Usually it would be something like changing all `phpcs` references to `./vendor/bin/phpcs` (or any other local path).
+
 ### WordPress
 
 #### Setup WordPress Standards (Manual)
@@ -49,14 +53,12 @@ git clone git@github.com:WordPress/WordPress-Coding-Standards.git --branch 2.3.0
 Secondly, we need to tell `phpcs` where these standards are.
 
 ```bash
-# change `phpcs` to `./vendor/bin/phpcs` if you installed codesniffer locally
 phpcs --config-set installed_paths /full/path/to/wpcs
 ```
 
 Finally, in order to check that `phpcs` recognises and uses the standards, we can check it like this:
 
 ```bash
-# change `phpcs` to `./vendor/bin/phpcs` if you installed codesniffer locally
 $ phpcs -i
 The installed coding standards are PEAR, Zend, PSR2, Squiz, PSR1, PSR12, WordPress, WordPress-Extra, WordPress-Docs and WordPress-Core
 ```
@@ -64,7 +66,6 @@ The installed coding standards are PEAR, Zend, PSR2, Squiz, PSR1, PSR12, WordPre
 The output should resemble this, with the WordPress standards. If they are missing, `phpcs` might not be recognising the path. Check its paths via:
 
 ```bash
-# change `phpcs` to `./vendor/bin/phpcs` if you installed codesniffer locally
 $ phpcs --config-show
 Using config file: /full/path/to/global/composer/vendor/squizlabs/php_codesniffer/CodeSniffer.conf
 
@@ -107,6 +108,6 @@ And add scripts, to configure `phpcs` correctly upon `composer install`, like th
 
 - If the script is not executable, run the following, where the path is to the composer executable. (If installed globally it should be in `~/.composer/vendor/bin`, otherwise it's in the folder that contains `composer.json`.)
 
-```bash
-chmod +x vendor/bin/php-pre-commit
-```
+    ```bash
+    chmod +x vendor/bin/php-pre-commit
+    ```
