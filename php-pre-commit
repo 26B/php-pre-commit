@@ -9,7 +9,7 @@ GIT_DIR=$(git rev-parse --show-toplevel)
 if test -z "$GIT_DIR"
 then
     echo ${LRED}No .git found to move pre-commit hook.${NC}
-    exit 1
+    exit 0
 fi
 
 cp ${SCRIPT_DIR}/../26b/php-pre-commit/pre-commit ${GIT_DIR}/.git/hooks/pre-commit
