@@ -9,7 +9,7 @@ GIT_DIR=$(git rev-parse --show-toplevel)
 # Check if the fit folders exists.
 if test -z "$GIT_DIR"
 then
-    echo ${LRED}No `.git/` folder found initialize with `git init` or check that it was cloned as intended.${NC}
+    echo ${LRED}No `.git/` folder found. Initialize with `git init` or check that it was cloned as intended.${NC}
     exit 0
 fi
 
