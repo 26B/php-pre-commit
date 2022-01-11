@@ -1,9 +1,9 @@
 {
-    "name": "26b/php-pre-commit",
-    "description": "Pre-commit git hook for enforcing php standards.",
-    "type": "scripts",
-    "license": "MIT",
-    "bin": [
-        "php-pre-commit"
-    ]
+  "name": "26b/php-pre-commit",
+  "description": "Pre-commit git hook for enforcing php standards.",
+  "type": "scripts",
+  "license": "MIT",
+  "bin": [
+    "php-pre-commit"
+  ]
 }
