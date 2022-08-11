@@ -15,13 +15,13 @@ then
 fi
 
 # Determine bin directory using composer ^2.2.2 global.
-if [[ -z "$COMPOSER_BIN_DIR" ]]; then
-  BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if [[ -z "$COMPOSER_RUNTIME_BIN_DIR" ]]; then
+  HOOK_FILE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/pre-commit"
 else
-  BIN_DIR="$COMPOSER_BIN_DIR"
+  HOOK_FILE_PATH="$COMPOSER_RUNTIME_BIN_DIR/../26b/php-pre-commit/pre-commit"
 fi
 
-HOOK_FILE_PATH="${BIN_DIR}/../26b/php-pre-commit/pre-commit"
+echo $HOOK_FILE_PATH
 
 # Check if hook file exists before copying.
 if test -z "$HOOK_FILE_PATH"
