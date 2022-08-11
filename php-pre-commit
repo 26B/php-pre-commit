@@ -21,8 +21,6 @@ else
   HOOK_FILE_PATH="$COMPOSER_RUNTIME_BIN_DIR/../26b/php-pre-commit/pre-commit"
 fi
 
-echo $HOOK_FILE_PATH
-
 # Check if hook file exists before copying.
 if test -z "$HOOK_FILE_PATH"
 then
