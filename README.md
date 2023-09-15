@@ -10,7 +10,7 @@ This package **does not require** PHPCS because it is up to you whether you want
 # Local
 composer require --dev squizlabs/php_codesniffer
 # Or global
-composer require global squizlabs/php_codesniffer
+composer global require squizlabs/php_codesniffer
 ```
 
 Install via the composer command:
