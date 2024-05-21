@@ -4,15 +4,6 @@ Pre-commit git hook for enforcing php standards.
 
 Currently uses PHP_CodeSniffer (PHPCS) and corrects .php staged files according to a phpcs config file (usually a phpcs.xml).
 
-This package **does not require** PHPCS because it is up to you whether you want to use a local or global `phpcs`. Local `phpcs` takes precedence when the pre-commit runs. You can require them in the following way:
-
-```bash
-# Local
-composer require --dev squizlabs/php_codesniffer
-# Or global
-composer global require squizlabs/php_codesniffer
-```
-
 Install via the composer command:
 
 ```bash
@@ -31,6 +22,16 @@ In order for the hooks to be moved into the `.git/hooks` folder add the followin
 With `composer install` or `composer update` the `pre-commit` hook will be moved into `.git/hooks`.
 
 If you want to skip the pre-commit execution, you can add the argument `--no-verify` to `git commit`.
+
+> [!IMPORTANT]
+> This package **does not require** PHPCS because it is up to you whether you want to use a local or global `phpcs`. Local `phpcs` takes precedence when the pre-commit runs. You can require them in the following way:
+>
+> ```bash
+> # Local
+> composer require --dev squizlabs/php_codesniffer
+> # Or global
+> composer global require squizlabs/php_codesniffer
+> ```
 
 ## Use Cases
 
