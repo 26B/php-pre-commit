@@ -45,10 +45,10 @@ Usually it would be something like changing all `phpcs` references to `./vendor/
 
 #### Setup WordPress Standards (Manual)
 
-First we need to clone the WordPress standards repository. It should be placed in a directory that `phpcs` can access. We placed ours in a `wpcs` directory in root. Clone the repository into the `wpcs` folder via:
+First we need to clone the WordPress standards repository. It should be placed in a directory that `phpcs` can access. We placed ours in the home directory `wpcs` directory in root. Clone the repository into the `wpcs` folder via:
 
 ```bash
-git clone git@github.com:WordPress/WordPress-Coding-Standards.git --branch 2.3.0 wpcs
+git clone git@github.com:WordPress/WordPress-Coding-Standards.git --depth=1 --branch 3.1.0 ~/wpcs
 ```
 
 Secondly, we need to tell `phpcs` where these standards are.
