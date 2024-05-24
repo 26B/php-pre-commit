@@ -1,9 +1,41 @@
 {
-  "name": "26b/php-pre-commit",
-  "description": "Pre-commit git hook for enforcing php standards.",
-  "type": "scripts",
-  "license": "MIT",
-  "bin": [
-    "php-pre-commit"
-  ]
+    "name": "26b/php-pre-commit",
+    "description": "Pre-commit git hook for enforcing php standards.",
+    "type": "project",
+    "license": "MIT",
+    "bin": [
+        "php-pre-commit"
+    ],
+    "require": {
+        "php": "^8.2.0",
+        "composer/composer": "^2.7",
+        "laravel-zero/framework": "^11.0.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.15.2",
+        "mockery/mockery": "^1.6.11",
+        "pestphp/pest": "^2.34.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

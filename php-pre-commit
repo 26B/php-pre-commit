@@ -1,34 +1,53 @@
-#!/bin/sh
+#!/usr/bin/env php
+<?php
 
-# Cash output coloring.
-LRED='\033[1;31m'
-LYELLOW='\033[00;33m'
-NC='\033[0m'
+define('LARAVEL_START', microtime(true));
 
-GIT_DIR=$(git rev-parse --show-toplevel)/.git/hooks
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader
+| for our application. We just need to utilize it! We'll require it
+| into the script here so that we do not have to worry about the
+| loading of any our classes "manually". Feels great to relax.
+|
+*/
 
-# Check if the git hooks folders exists.
-if test -z "$GIT_DIR"
-then
-  echo ${LRED}No `.git/` folder found. Initialize with `git init` or check that it was cloned as intended.${NC}
-  exit 0
-fi
+$autoloader = require file_exists(__DIR__.'/vendor/autoload.php') ?  __DIR__.'/vendor/autoload.php' : __DIR__.'/../../autoload.php';
 
-# Determine bin directory using composer ^2.2.2 global.
-if [[ -z "$COMPOSER_RUNTIME_BIN_DIR" ]]; then
-  HOOK_FILE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/pre-commit"
-else
-  HOOK_FILE_PATH="$COMPOSER_RUNTIME_BIN_DIR/../26b/php-pre-commit/pre-commit"
-fi
+$app = require_once __DIR__.'/bootstrap/app.php';
 
-# Check if hook file exists before copying.
-if test -z "$HOOK_FILE_PATH"
-then
-  echo "${LRED}No hook file found. There could be something wrong with how the package was installed, reinstall and retry.${NC}"
-  echo "${LYELLOW}If the problem persists open an issue on the development repository (https://github.com/26B/php-pre-commit).${NC}"
-  exit 0
-fi
+/*
+|--------------------------------------------------------------------------
+| Run The Artisan Application
+|--------------------------------------------------------------------------
+|
+| When we run the console application, the current CLI command will be
+| executed in this console and the response sent back to a terminal
+| or another output device for the developers. Here goes nothing!
+|
+*/
 
-# Add pre-commit hook to the hooks directory.
-cp $HOOK_FILE_PATH "${GIT_DIR}/pre-commit"
-chmod +x "${GIT_DIR}/pre-commit"
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+
+$status = $kernel->handle(
+    $input = new Symfony\Component\Console\Input\ArgvInput,
+    new Symfony\Component\Console\Output\ConsoleOutput
+);
+
+/*
+|--------------------------------------------------------------------------
+| Shutdown The Application
+|--------------------------------------------------------------------------
+|
+| Once Artisan has finished running, we will fire off the shutdown events
+| so that any final work may be done by the application before we shut
+| down the process. This is the last thing to happen to the request.
+|
+*/
+
+$kernel->terminate($input, $status);
+
+exit($status);
